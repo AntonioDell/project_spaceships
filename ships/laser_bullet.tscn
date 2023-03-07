@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgd2mblnm78nu"]
+
+[ext_resource type="Script" path="res://ships/laser_bullet.gd" id="1_ac10q"]
+[ext_resource type="PackedScene" uid="uid://dvb80kv17x16k" path="res://velocity_component.tscn" id="1_kr22o"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uw7t2"]
+size = Vector3(0.2773, 2, 1)
+
+[sub_resource type="Gradient" id="Gradient_vx5jg"]
+offsets = PackedFloat32Array(0.856725)
+colors = PackedColorArray(0, 0.8, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fielh"]
+gradient = SubResource("Gradient_vx5jg")
+width = 30
+height = 200
+
+[node name="LaserBullet" type="Area3D"]
+collision_layer = 2
+collision_mask = 2
+input_ray_pickable = false
+script = ExtResource("1_ac10q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.990166, 0)
+shape = SubResource("BoxShape3D_uw7t2")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+centered = false
+offset = Vector2(-15, 0)
+texture = SubResource("GradientTexture2D_fielh")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0018, 0)
+aabb = AABB(-0.149, -1.002, -0.5, 0.298, 2.003, 1)
+
+[node name="velocity_component" parent="." instance=ExtResource("1_kr22o")]
+speed = 10.0
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_screen_exited"]
+[connection signal="velocity_changed" from="velocity_component" to="." method="_on_velocity_changed"]

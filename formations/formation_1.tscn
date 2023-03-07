@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://c73e3omack5v0"]
+
+[ext_resource type="PackedScene" uid="uid://c1rrx86ebsu6k" path="res://formations/formation_grid.tscn" id="1_004cm"]
+
+[node name="formation_1" instance=ExtResource("1_004cm")]
+layer_0/tile_data = PackedInt32Array(-65534, 2, 0, -65533, 2, 0, -65527, 2, 0, -65528, 2, 0, -196598, 2, 0, -327670, 2, 0, -196607, 2, 0, -327679, 2, 0)
+layer_1/tile_data = PackedInt32Array(-327679, 3, 0, -196607, 3, 0, -65534, 3, 0, -65533, 3, 0, -65528, 3, 0, -65527, 3, 0, -196598, 3, 0, -327670, 3, 0)

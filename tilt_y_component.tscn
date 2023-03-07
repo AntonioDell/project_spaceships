@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://dc7pu5v45t7ue"]
+
+[node name="tilt_y_component" type="Node"]

@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3 uid="uid://c1rrx86ebsu6k"]
+
+[ext_resource type="Texture2D" uid="uid://ducdnwcnt32a1" path="res://formations/tile_1.png" id="1_jvb5f"]
+[ext_resource type="Texture2D" uid="uid://bev41ws3ky6kd" path="res://formations/tile_down.png" id="2_14f7d"]
+[ext_resource type="Script" path="res://formations/formation_grid.gd" id="3_w6exi"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ncs0e"]
+texture = ExtResource("1_jvb5f")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/custom_data_0 = Vector2i(1, 1)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a7vog"]
+texture = ExtResource("2_14f7d")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/custom_data_1 = Vector2(0, 1)
+
+[sub_resource type="TileSet" id="TileSet_65ywg"]
+tile_size = Vector2i(64, 64)
+custom_data_layer_0/name = "size"
+custom_data_layer_0/type = 6
+custom_data_layer_1/name = "direction"
+custom_data_layer_1/type = 5
+sources/2 = SubResource("TileSetAtlasSource_ncs0e")
+sources/3 = SubResource("TileSetAtlasSource_a7vog")
+
+[node name="formation_grid" type="TileMap"]
+position = Vector2(-26, 0)
+tile_set = SubResource("TileSet_65ywg")
+format = 2
+layer_0/name = "size"
+layer_1/name = "direction"
+layer_1/enabled = true
+layer_1/modulate = Color(1, 1, 1, 0.372549)
+layer_1/y_sort_enabled = false
+layer_1/y_sort_origin = 0
+layer_1/z_index = 0
+layer_1/tile_data = PackedInt32Array()
+script = ExtResource("3_w6exi")

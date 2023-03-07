@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://8ofi6mj0nigs"]
+
+[ext_resource type="Script" path="res://ships/barrel_roll_component.gd" id="1_bhgyy"]
+[ext_resource type="Script" path="res://velocity_component.gd" id="2_vgx6x"]
+
+[node name="barrel_roll_component" type="Node"]
+script = ExtResource("1_bhgyy")
+
+[node name="VelocityComponent" type="Node" parent="."]
+script = ExtResource("2_vgx6x")
+speed = 6.0
+is_disabled = true
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="velocity_changed" from="VelocityComponent" to="." method="_on_velocity_changed"]
+[connection signal="timeout" from="Timer" to="." method="_finish_roll"]

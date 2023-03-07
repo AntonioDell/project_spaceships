@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://drfjqgic0ja43"]
+
+[ext_resource type="PackedScene" uid="uid://dtybqqlnyraij" path="res://ships/player_ship.tscn" id="1_oyvow"]
+[ext_resource type="PackedScene" uid="uid://p8h4dx0c4p7" path="res://scrolling_background.tscn" id="2_5idxo"]
+[ext_resource type="PackedScene" uid="uid://clliiarll1s50" path="res://enemies/enemy_ship_1.tscn" id="3_v7nxx"]
+[ext_resource type="PackedScene" uid="uid://cul8hacm5cor" path="res://enemies/enemy_spawner.tscn" id="4_7frir"]
+
+[sub_resource type="Environment" id="Environment_w7m7k"]
+background_mode = 3
+background_canvas_max_layer = 100
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x2e77"]
+size = Vector3(1, 51.0387, 10)
+
+[node name="Wrold" type="Node"]
+
+[node name="ScrollingBackground" parent="." instance=ExtResource("2_5idxo")]
+speed = 10.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_w7m7k")
+
+[node name="3DObjects" type="Node3D" parent="."]
+
+[node name="PlayerShip" parent="3DObjects" instance=ExtResource("1_oyvow")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+
+[node name="Camera3D" type="Camera3D" parent="3DObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30.9314)
+current = true
+far = 100.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="3DObjects"]
+transform = Transform3D(1, 0, 0, 0, 0.274698, 0.961531, 0, -0.961531, 0.274698, 0, 0, 0)
+sky_mode = 1
+
+[node name="Walls" type="Node3D" parent="3DObjects"]
+
+[node name="Left" type="StaticBody3D" parent="3DObjects/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.5565, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DObjects/Walls/Left"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.279312, 0, 0)
+shape = SubResource("BoxShape3D_x2e77")
+
+[node name="Right" type="StaticBody3D" parent="3DObjects/Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.0478, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DObjects/Walls/Right"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.279312, 0, 0)
+shape = SubResource("BoxShape3D_x2e77")
+
+[node name="Bottom" type="StaticBody3D" parent="3DObjects/Walls"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -24.1688, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DObjects/Walls/Bottom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.279312, 0, 0)
+shape = SubResource("BoxShape3D_x2e77")
+
+[node name="Top" type="StaticBody3D" parent="3DObjects/Walls"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 23.3821, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DObjects/Walls/Top"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.279312, 0, 0)
+shape = SubResource("BoxShape3D_x2e77")
+
+[node name="TopLeftCorner" type="Node3D" parent="3DObjects"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.63, 31.7939, 0)
+
+[node name="EnemySpawner" parent="." node_paths=PackedStringArray("top_left_corner_reference", "enemy_parent") instance=ExtResource("4_7frir")]
+top_left_corner_reference = NodePath("../3DObjects/TopLeftCorner")
+enemy_parent = NodePath("../3DObjects")
+size_1_enemies = Array[PackedScene]([ExtResource("3_v7nxx")])

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvb80kv17x16k"]
+
+[ext_resource type="Script" path="res://velocity_component.gd" id="1_e6ptx"]
+
+[node name="velocity_component" type="Node"]
+script = ExtResource("1_e6ptx")

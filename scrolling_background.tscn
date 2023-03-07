@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://p8h4dx0c4p7"]
+
+[ext_resource type="Script" path="res://scrolling_background.gd" id="1_lxq4v"]
+[ext_resource type="Texture2D" uid="uid://ccdlh75wo2q5x" path="res://Space Background.png" id="1_nb6ca"]
+
+[node name="ScrollingBackground" type="ParallaxBackground"]
+scroll_ignore_camera_zoom = true
+script = ExtResource("1_lxq4v")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(0, 3000)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(0, -4920)
+texture = ExtResource("1_nb6ca")
+centered = false

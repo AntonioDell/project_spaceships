@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpbnpe1p4jf3j"]
+
+[ext_resource type="Script" path="res://ships/gun.gd" id="1_lrji5"]
+
+[node name="Gun" type="Node3D"]
+script = ExtResource("1_lrji5")
+
+[node name="CooldownTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true

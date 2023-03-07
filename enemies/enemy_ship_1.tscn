@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://clliiarll1s50"]
+
+[ext_resource type="ArrayMesh" uid="uid://cq5wqspt3i63s" path="res://ship_meshes/MicroRecon_Mesh.res" id="1_4e2e8"]
+[ext_resource type="Script" path="res://enemies/enemy_ship_1.gd" id="1_82crk"]
+[ext_resource type="PackedScene" uid="uid://cvl5vhof5g8cm" path="res://enemies/follow_curve_component.tscn" id="2_0xaou"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dqbf2"]
+points = PackedVector3Array(0.0998415, 1.14888, 0.143961, 0.0998415, 1.14888, 0.0440388, -0.10008, 1.14888, 0.143961, 0.0998415, 1.0487, 0.24396, 0.19992, 1.0487, 0.143961, 1.2, 0.248783, -0.155961, 1.09992, 0.348744, -0.155961, 0.0998415, 1.0487, -0.155961, -0.10008, 1.14888, 0.0440388, 1.09992, 0.348744, -0.25604, -1.10016, 0.348744, -0.155961, -0.200159, 1.0487, 0.143961, -0.10008, 1.0487, 0.24396, 0.0998415, 0.848774, 0.344039, 0.899763, 0.248783, 0.143961, 1.09992, 0.248783, -0.0559613, 1.2, 0.248783, -0.25604, 1.2, 0.148823, -0.155961, 0.0998415, 0.948734, -0.25604, -0.10008, 1.0487, -0.155961, -1.10016, 0.348744, -0.25604, 1.09992, 0.248783, -0.355961, -1.2, 0.248783, -0.155961, -1.10016, 0.248783, -0.0559613, -0.900002, 0.248783, 0.143961, -0.10008, 0.848774, 0.344039, 0.399841, -0.551128, 0.444039, 0.899763, 0.148823, 0.143961, 1.09992, 0.148823, -0.0559613, 1.2, 0.148823, -0.25604, 0.399841, -0.651314, 0.444039, 0.599763, -0.551128, 0.143961, 0.19992, -1.15112, 0.0440388, 0.0998415, 0.448705, -0.355961, -0.10008, 0.948734, -0.25604, -1.10016, 0.248783, -0.355961, -1.2, 0.248783, -0.25604, 1.09992, 0.148823, -0.355961, -1.2, 0.148823, -0.155961, -1.10016, 0.148823, -0.0559613, -0.900002, 0.148823, 0.143961, -0.40008, -0.551128, 0.444039, 0.19992, -1.15112, -0.0559613, -0.40008, -0.651314, 0.444039, -0.200159, -1.15112, 0.0440388, -0.10008, 0.448705, -0.355961, -1.10016, 0.148823, -0.355961, -1.2, 0.148823, -0.25604, 0.19992, -0.751275, -0.355961, -0.600002, -0.551128, 0.143961, -0.200159, -1.15112, -0.0559613, -0.200159, -0.751275, -0.355961)
+
+[sub_resource type="Curve3D" id="Curve3D_rk2p7"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -6, 0, 0, -100, 0),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
+[node name="EnemyShip1" type="CharacterBody3D"]
+collision_layer = 0
+collision_mask = 0
+axis_lock_linear_z = true
+motion_mode = 1
+script = ExtResource("1_82crk")
+
+[node name="MicroReconMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+mesh = ExtResource("1_4e2e8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_dqbf2")
+
+[node name="follow_curve_component" parent="." instance=ExtResource("2_0xaou")]
+curve = SubResource("Curve3D_rk2p7")
+progress_units_per_second = 10.0
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_screen_exited"]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvl5vhof5g8cm"]
+
+[ext_resource type="Script" path="res://enemies/follow_curve_component.gd" id="1_plb3d"]
+
+[node name="follow_curve_component" type="Path3D"]
+script = ExtResource("1_plb3d")
+
+[node name="PathFollow3D" type="PathFollow3D" parent="."]
+transform = Transform3D(-0.999552, -0.0297548, 0.00307376, 1.86264e-09, 0.102756, 0.994707, -0.0299131, 0.994261, -0.10271, 0.0289921, 0.0322921, -0.00797462)
+rotation_mode = 0
