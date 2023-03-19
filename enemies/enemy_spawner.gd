@@ -30,7 +30,6 @@ func _spawn_next_formation():
 			continue
 		var enemy = enemy_scene.instantiate() as Node3D
 		enemy.position = top_left_corner_reference.position + (enemy_data.spawn_position / 64 * 3)
-		print(enemy.position)
 		if "move_direction" in enemy and "move_direction" in enemy_data:
 			enemy.move_direction = Vector3(enemy_data.move_direction.x, enemy_data.move_direction.y, 0)
 		enemy_parent.call_deferred("add_child", enemy)

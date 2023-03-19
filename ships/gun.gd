@@ -14,6 +14,6 @@ func fire(bullet_direction: Vector2, bullet_rotation = Vector3.ZERO):
 	var bullet = bullet_scene.instantiate() as Node3D
 	if "direction" in bullet:
 		bullet.direction = bullet_direction
-	get_tree().root.add_child(bullet)
+	get_parent().add_sibling(bullet)
 	bullet.global_position = global_position
 	bullet.global_rotation = bullet_rotation

@@ -1,6 +1,6 @@
 extends CharacterBody3D
 
-enum { MOVE, EXIT_SCREEN }
+enum { MOVE, SHOOT, EXIT_SCREEN }
 
 
 @export var move_direction := Vector3.DOWN:
@@ -11,6 +11,8 @@ enum { MOVE, EXIT_SCREEN }
 var _state = MOVE
 @onready var _follow_curve_component := $follow_curve_component as FollowCurveComponent
 @onready var _visible_on_screen_notifier := $VisibleOnScreenNotifier3D
+@onready var _gun := $Gun as Gun
+@onready var _health_tracker_component := $health_tracker_component as HealthTrackerComponent
 
 
 func _ready():
@@ -23,6 +25,9 @@ func _ready():
 func _process(delta):
 	match _state:
 		MOVE: _follow_curve_component.start_follow()
+		SHOOT: 
+			_gun.fire(Vector2.UP)
+			_state = MOVE
 		EXIT_SCREEN: 
 			_follow_curve_component.stop_follow()
 			queue_free()
@@ -30,3 +35,19 @@ func _process(delta):
 
 func _on_screen_exited():
 	_state = EXIT_SCREEN
+
+
+func _on_shoot_cooldown_timeout():
+	_state = SHOOT
+
+
+func _on_damage_received(damage: Damage):
+	_health_tracker_component.change_health(-damage.amount)
+
+
+func _on_health_depleted():
+	queue_free()
+
+
+func _on_delay_passed():
+	$ShootCooldown.start()

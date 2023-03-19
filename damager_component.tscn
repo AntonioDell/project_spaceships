@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmplaadmyeejn"]
+
+[ext_resource type="Script" path="res://damager_component.gd" id="1_wncti"]
+
+[node name="damager_component" type="Area3D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_wncti")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

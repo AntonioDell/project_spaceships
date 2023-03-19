@@ -1,8 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://clliiarll1s50"]
+[gd_scene load_steps=12 format=3 uid="uid://cfv5ixggdpcq3"]
 
 [ext_resource type="ArrayMesh" uid="uid://cq5wqspt3i63s" path="res://ship_meshes/MicroRecon_Mesh.res" id="1_4e2e8"]
 [ext_resource type="Script" path="res://enemies/enemy_ship_1.gd" id="1_82crk"]
 [ext_resource type="PackedScene" uid="uid://cvl5vhof5g8cm" path="res://enemies/follow_curve_component.tscn" id="2_0xaou"]
+[ext_resource type="PackedScene" uid="uid://bpbnpe1p4jf3j" path="res://ships/gun.tscn" id="4_8tlv1"]
+[ext_resource type="PackedScene" uid="uid://7h31cq5cyxdx" path="res://enemies/enemy_standard_bullet.tscn" id="5_43wo0"]
+[ext_resource type="PackedScene" uid="uid://s4de1a1b4xry" path="res://damage_receiver_component.tscn" id="6_cjblb"]
+[ext_resource type="PackedScene" uid="uid://bhmptmnynoewl" path="res://health_tracker_component.tscn" id="6_h7x78"]
+[ext_resource type="PackedScene" uid="uid://bsik64rwdek1b" path="res://random_delay_comopnent.tscn" id="8_u2d2f"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dqbf2"]
 points = PackedVector3Array(0.0998415, 1.14888, 0.143961, 0.0998415, 1.14888, 0.0440388, -0.10008, 1.14888, 0.143961, 0.0998415, 1.0487, 0.24396, 0.19992, 1.0487, 0.143961, 1.2, 0.248783, -0.155961, 1.09992, 0.348744, -0.155961, 0.0998415, 1.0487, -0.155961, -0.10008, 1.14888, 0.0440388, 1.09992, 0.348744, -0.25604, -1.10016, 0.348744, -0.155961, -0.200159, 1.0487, 0.143961, -0.10008, 1.0487, 0.24396, 0.0998415, 0.848774, 0.344039, 0.899763, 0.248783, 0.143961, 1.09992, 0.248783, -0.0559613, 1.2, 0.248783, -0.25604, 1.2, 0.148823, -0.155961, 0.0998415, 0.948734, -0.25604, -0.10008, 1.0487, -0.155961, -1.10016, 0.348744, -0.25604, 1.09992, 0.248783, -0.355961, -1.2, 0.248783, -0.155961, -1.10016, 0.248783, -0.0559613, -0.900002, 0.248783, 0.143961, -0.10008, 0.848774, 0.344039, 0.399841, -0.551128, 0.444039, 0.899763, 0.148823, 0.143961, 1.09992, 0.148823, -0.0559613, 1.2, 0.148823, -0.25604, 0.399841, -0.651314, 0.444039, 0.599763, -0.551128, 0.143961, 0.19992, -1.15112, 0.0440388, 0.0998415, 0.448705, -0.355961, -0.10008, 0.948734, -0.25604, -1.10016, 0.248783, -0.355961, -1.2, 0.248783, -0.25604, 1.09992, 0.148823, -0.355961, -1.2, 0.148823, -0.155961, -1.10016, 0.148823, -0.0559613, -0.900002, 0.148823, 0.143961, -0.40008, -0.551128, 0.444039, 0.19992, -1.15112, -0.0559613, -0.40008, -0.651314, 0.444039, -0.200159, -1.15112, 0.0440388, -0.10008, 0.448705, -0.355961, -1.10016, 0.148823, -0.355961, -1.2, 0.148823, -0.25604, 0.19992, -0.751275, -0.355961, -0.600002, -0.551128, 0.143961, -0.200159, -1.15112, -0.0559613, -0.200159, -0.751275, -0.355961)
@@ -14,6 +19,9 @@ _data = {
 }
 point_count = 2
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_bl7k3"]
+size = Vector3(2.42341, 2.30508, 1)
+
 [node name="EnemyShip1" type="CharacterBody3D"]
 collision_layer = 0
 collision_mask = 0
@@ -22,7 +30,7 @@ motion_mode = 1
 script = ExtResource("1_82crk")
 
 [node name="MicroReconMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 8.74228e-08, -8.74228e-08, 8.74228e-08, -1, 0, -8.74228e-08, -7.64274e-15, -1, 0, 0, 0)
 mesh = ExtResource("1_4e2e8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -31,8 +39,31 @@ shape = SubResource("ConvexPolygonShape3D_dqbf2")
 
 [node name="follow_curve_component" parent="." instance=ExtResource("2_0xaou")]
 curve = SubResource("Curve3D_rk2p7")
-progress_units_per_second = 10.0
+progress_units_per_second = 5.0
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
 
+[node name="Gun" parent="." instance=ExtResource("4_8tlv1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1545, 0)
+bullet_scene = ExtResource("5_43wo0")
+
+[node name="ShootCooldown" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="health_tracker_component" parent="." instance=ExtResource("6_h7x78")]
+max_health = 1
+health = 1
+
+[node name="damage_receiver_component" parent="." instance=ExtResource("6_cjblb")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="damage_receiver_component"]
+shape = SubResource("BoxShape3D_bl7k3")
+
+[node name="random_delay_comopnent" parent="." instance=ExtResource("8_u2d2f")]
+max_delay = 5.0
+
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_screen_exited"]
+[connection signal="timeout" from="ShootCooldown" to="." method="_on_shoot_cooldown_timeout"]
+[connection signal="health_depleted" from="health_tracker_component" to="." method="_on_health_depleted"]
+[connection signal="damage_received" from="damage_receiver_component" to="." method="_on_damage_received"]
+[connection signal="delay_passed" from="random_delay_comopnent" to="." method="_on_delay_passed"]

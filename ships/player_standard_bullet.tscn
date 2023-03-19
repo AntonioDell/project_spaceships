@@ -1,0 +1,40 @@
+[gd_scene load_steps=8 format=3 uid="uid://btw4vk823iuxy"]
+
+[ext_resource type="Script" path="res://ships/player_standard_bullet.gd" id="1_qm4vp"]
+[ext_resource type="Texture2D" uid="uid://cu3sfgwf8cypr" path="res://ships/player_standard_bullet.png" id="1_wid02"]
+[ext_resource type="Script" path="res://velocity_component.gd" id="3_knswb"]
+[ext_resource type="PackedScene" uid="uid://cmplaadmyeejn" path="res://damager_component.tscn" id="4_omai7"]
+[ext_resource type="Script" path="res://damage.gd" id="5_unh05"]
+
+[sub_resource type="Resource" id="Resource_l0x2n"]
+script = ExtResource("5_unh05")
+amount = 1
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0llep"]
+radius = 0.165859
+height = 0.621559
+
+[node name="player_standard_bullet" type="Node3D"]
+script = ExtResource("1_qm4vp")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-8.74228e-08, -2, 0, 2, -8.74228e-08, 0, 0, 0, 2, 0, 0, 0)
+texture = ExtResource("1_wid02")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+
+[node name="VelocityComponent" type="Node" parent="."]
+script = ExtResource("3_knswb")
+speed = 20.0
+
+[node name="damager_component" parent="." instance=ExtResource("4_omai7")]
+damage = SubResource("Resource_l0x2n")
+damage_target = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="damager_component"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.029928, 0)
+shape = SubResource("CapsuleShape3D_0llep")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_screen_exited"]
+[connection signal="velocity_changed" from="VelocityComponent" to="." method="_on_velocity_changed"]
+[connection signal="damage_dealt" from="damager_component" to="." method="_on_damager_component_damage_dealt"]

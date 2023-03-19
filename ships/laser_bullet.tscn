@@ -1,7 +1,29 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgd2mblnm78nu"]
+[gd_scene load_steps=6 format=3 uid="uid://b8tofj8loe6lt"]
 
-[ext_resource type="Script" path="res://ships/laser_bullet.gd" id="1_ac10q"]
 [ext_resource type="PackedScene" uid="uid://dvb80kv17x16k" path="res://velocity_component.tscn" id="1_kr22o"]
+
+[sub_resource type="GDScript" id="GDScript_2whc5"]
+script/source = "extends Area3D
+
+var _motion := Vector3.ZERO
+
+func _ready():
+	($velocity_component as VelocityComponent).direction = Vector2(0, 1)
+	await get_tree().physics_frame
+	if not $VisibleOnScreenNotifier3D.is_on_screen():
+		_on_screen_exited()
+
+func _physics_process(delta):
+	global_position += _motion * delta
+
+
+func _on_velocity_changed(new_velocity, acceleration):
+	_motion = Vector3(new_velocity.x, new_velocity.y, 0)
+
+
+func _on_screen_exited():
+	queue_free()
+"
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uw7t2"]
 size = Vector3(0.2773, 2, 1)
@@ -19,7 +41,7 @@ height = 200
 collision_layer = 2
 collision_mask = 2
 input_ray_pickable = false
-script = ExtResource("1_ac10q")
+script = SubResource("GDScript_2whc5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.990166, 0)
