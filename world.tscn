@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://drfjqgic0ja43"]
 
-[ext_resource type="PackedScene" uid="uid://dtybqqlnyraij" path="res://ships/player_ship.tscn" id="1_oyvow"]
+[ext_resource type="PackedScene" uid="uid://cucsfffswxicn" path="res://ships/player_ship.tscn" id="1_oyvow"]
 [ext_resource type="PackedScene" uid="uid://p8h4dx0c4p7" path="res://scrolling_background.tscn" id="2_5idxo"]
-[ext_resource type="PackedScene" uid="uid://clliiarll1s50" path="res://enemies/enemy_ship_1.tscn" id="3_v7nxx"]
+[ext_resource type="PackedScene" uid="uid://cbv2h2w75awyr" path="res://enemies/enemy_ship_1.tscn" id="3_v7nxx"]
 [ext_resource type="PackedScene" uid="uid://cul8hacm5cor" path="res://enemies/enemy_spawner.tscn" id="4_7frir"]
 
 [sub_resource type="Environment" id="Environment_w7m7k"]

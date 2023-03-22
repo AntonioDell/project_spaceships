@@ -1,17 +1,16 @@
-[gd_scene load_steps=17 format=3 uid="uid://dtybqqlnyraij"]
+[gd_scene load_steps=16 format=3 uid="uid://cucsfffswxicn"]
 
 [ext_resource type="Script" path="res://ships/player_ship.gd" id="1_r5s6i"]
 [ext_resource type="ArrayMesh" uid="uid://b5ukyqbhdkitg" path="res://ship_meshes/InfrareddFurtive.res" id="2_yiwjg"]
-[ext_resource type="PackedScene" uid="uid://dvb80kv17x16k" path="res://velocity_component.tscn" id="3_4ymqx"]
 [ext_resource type="PackedScene" uid="uid://bpbnpe1p4jf3j" path="res://ships/gun.tscn" id="4_0l4rk"]
-[ext_resource type="PackedScene" uid="uid://btw4vk823iuxy" path="res://ships/player_standard_bullet.tscn" id="4_466we"]
-[ext_resource type="PackedScene" uid="uid://brf6pbwe3p0n" path="res://player_control_component.tscn" id="4_g7u2j"]
-[ext_resource type="PackedScene" uid="uid://s4de1a1b4xry" path="res://damage_receiver_component.tscn" id="5_cje7g"]
-[ext_resource type="PackedScene" uid="uid://bhmptmnynoewl" path="res://health_tracker_component.tscn" id="6_2b157"]
-[ext_resource type="PackedScene" uid="uid://dc7pu5v45t7ue" path="res://tilt_y_component.tscn" id="6_k3wgp"]
-[ext_resource type="Script" path="res://tilt_y_component.gd" id="7_ch88u"]
-[ext_resource type="PackedScene" uid="uid://8ofi6mj0nigs" path="res://ships/barrel_roll_component.tscn" id="8_m7n1j"]
-[ext_resource type="PackedScene" uid="uid://dq378bckch1nu" path="res://invincibility_component.tscn" id="12_dd0rt"]
+[ext_resource type="PackedScene" uid="uid://cpipm3o5v2hep" path="res://ships/player_standard_bullet.tscn" id="4_466we"]
+[ext_resource type="PackedScene" path="res://components/damage_receiver_component.tscn" id="5_p1ntq"]
+[ext_resource type="PackedScene" uid="uid://dc7pu5v45t7ue" path="res://components/tilt_y_component.tscn" id="6_k3wgp"]
+[ext_resource type="PackedScene" path="res://components/invincibility_component.tscn" id="7_t356y"]
+[ext_resource type="PackedScene" path="res://components/health_tracker_component.tscn" id="8_h7mw1"]
+[ext_resource type="PackedScene" path="res://ships/barrel_roll_component.tscn" id="8_m7n1j"]
+[ext_resource type="PackedScene" path="res://components/player_control_component.tscn" id="9_rqw4b"]
+[ext_resource type="PackedScene" path="res://components/velocity_component.tscn" id="10_fdiv8"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tglfw"]
 points = PackedVector3Array(-0.688658, -1.95049, -0.155479, 0.196671, 2.08413, 0.139625, 0.294699, 1.3951, 0.23796, -3.14921, -1.26187, 0.434824, 3.14921, -1.26187, 0.434824, 0.163676, 1, -0.466575, -3.14921, -0.769475, 0.139625, 3.14921, -0.769475, 0.139625, 0.5, -1.23332, -0.39064, -0.196671, 2.08413, -0.25391, -2.55858, -0.375805, 0.434824, -0.5, -1.23332, -0.39064, 0.393343, -2.04921, 0.0411928, 2.55858, -0.375805, 0.434824, 3.14921, -1.36018, 0.139625, 0.196671, 2.08413, -0.25391, -3.14921, -1.36018, 0.139625, -0.163676, 1, -0.466575, 0.393343, -2.04921, -0.155479, -0.196671, 2.08413, 0.139625, 3.14921, -0.671159, 0.23796, -3.14921, -0.671159, 0.23796, -0.196671, 1.88709, -0.352246, -0.393343, -2.04921, 0.0411928, 0.196671, 1.88709, -0.352246, -3.14921, -1.36018, 0.336392, 3.14921, -1.36018, 0.336392, 0.688658, -1.95049, -0.155479, -0.393343, -2.04921, -0.155479, 2.9, -0.616666, 0.395893, -2.9, -0.616666, 0.395893, -0.294699, 1.3951, 0.23796)
@@ -41,58 +40,57 @@ mesh = ExtResource("2_yiwjg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04286, 0)
 bullet_scene = ExtResource("4_466we")
 
-[node name="damage_receiver_component" parent="." instance=ExtResource("5_cje7g")]
+[node name="damage_receiver_component" parent="." instance=ExtResource("5_p1ntq")]
 damage_source = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="damage_receiver_component"]
+[node name="damage_receiver_component@CollisionShape3D" type="CollisionShape3D" parent="damage_receiver_component"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.409019, 0)
 shape = SubResource("BoxShape3D_a2kck")
 
-[node name="damage_receiver_component2" parent="." instance=ExtResource("5_cje7g")]
+[node name="damage_receiver_component2" parent="." instance=ExtResource("5_p1ntq")]
 damage_source = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="damage_receiver_component2"]
+[node name="damage_receiver_component2@CollisionShape3D" type="CollisionShape3D" parent="damage_receiver_component2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.598709, 0)
 shape = SubResource("BoxShape3D_533qg")
 
-[node name="damage_receiver_component3" parent="." instance=ExtResource("5_cje7g")]
+[node name="damage_receiver_component3" parent="." instance=ExtResource("5_p1ntq")]
 damage_source = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="damage_receiver_component3"]
+[node name="damage_receiver_component3@CollisionShape3D" type="CollisionShape3D" parent="damage_receiver_component3"]
 transform = Transform3D(0.709042, 0.705167, 0, -0.705167, 0.709042, 0, 0, 0, 1, -0.480127, 0.138438, 0)
 shape = SubResource("BoxShape3D_logbo")
 
-[node name="damage_receiver_component4" parent="." instance=ExtResource("5_cje7g")]
+[node name="damage_receiver_component4" parent="." instance=ExtResource("5_p1ntq")]
 damage_source = 2
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="damage_receiver_component4"]
+[node name="damage_receiver_component4@CollisionShape3D2" type="CollisionShape3D" parent="damage_receiver_component4"]
 transform = Transform3D(0.709571, -0.704634, 0, 0.704634, 0.709571, 0, 0, 0, 1, 0.48, 0.138, 0)
 shape = SubResource("BoxShape3D_logbo")
 
-[node name="health_tracker_component" parent="." instance=ExtResource("6_2b157")]
+[node name="barrel_roll_component" parent="." instance=ExtResource("8_m7n1j")]
+
+[node name="invincibility_component" parent="." instance=ExtResource("7_t356y")]
+damage_receiver_paths = Array[NodePath]([NodePath("../damage_receiver_component"), NodePath("../damage_receiver_component2"), NodePath("../damage_receiver_component3"), NodePath("../damage_receiver_component4")])
+
+[node name="health_tracker_component" parent="." instance=ExtResource("8_h7mw1")]
 max_health = 3
 health = 3
 
-[node name="velocity_component" parent="." instance=ExtResource("3_4ymqx")]
-speed = 20.0
+[node name="player_control_component" parent="." instance=ExtResource("9_rqw4b")]
 
-[node name="player_control_component" parent="." instance=ExtResource("4_g7u2j")]
+[node name="velocity_component" parent="." instance=ExtResource("10_fdiv8")]
+speed = 15.0
 
 [node name="tilt_y_component" parent="." instance=ExtResource("6_k3wgp")]
-script = ExtResource("7_ch88u")
-
-[node name="barrel_roll_component" parent="." instance=ExtResource("8_m7n1j")]
-
-[node name="invincibility_component" parent="." instance=ExtResource("12_dd0rt")]
-damage_receiver_paths = Array[NodePath]([NodePath("../damage_receiver_component"), NodePath("../damage_receiver_component2"), NodePath("../damage_receiver_component3"), NodePath("../damage_receiver_component4")])
 
 [connection signal="damage_received" from="damage_receiver_component" to="." method="_on_damage_receiver_component_damage_received"]
 [connection signal="damage_received" from="damage_receiver_component2" to="." method="_on_damage_receiver_component_damage_received"]
 [connection signal="damage_received" from="damage_receiver_component3" to="." method="_on_damage_receiver_component_damage_received"]
 [connection signal="damage_received" from="damage_receiver_component4" to="." method="_on_damage_receiver_component_damage_received"]
 [connection signal="health_depleted" from="health_tracker_component" to="." method="_on_health_tracker_component_health_depleted"]
-[connection signal="velocity_changed" from="velocity_component" to="." method="_on_velocity_changed"]
 [connection signal="player_move" from="player_control_component" to="." method="_on_player_move"]
 [connection signal="player_rolls" from="player_control_component" to="." method="_on_player_control_component_player_rolls"]
 [connection signal="player_shoots" from="player_control_component" to="." method="_on_player_shoots"]
+[connection signal="velocity_changed" from="velocity_component" to="." method="_on_velocity_changed"]
 [connection signal="tilt_changed" from="tilt_y_component" to="." method="_on_tilt_y_component_tilt_changed"]

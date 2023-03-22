@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsik64rwdek1b"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://random_delay_comopnent.gd" id="1_fckke"]
+[ext_resource type="Script" path="res://components/random_delay_comopnent.gd" id="1_fckke"]
 
 [node name="random_delay_comopnent" type="Node"]
 script = ExtResource("1_fckke")

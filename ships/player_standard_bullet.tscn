@@ -1,18 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://btw4vk823iuxy"]
+[gd_scene load_steps=8 format=3 uid="uid://cpipm3o5v2hep"]
 
 [ext_resource type="Script" path="res://ships/player_standard_bullet.gd" id="1_qm4vp"]
 [ext_resource type="Texture2D" uid="uid://cu3sfgwf8cypr" path="res://ships/player_standard_bullet.png" id="1_wid02"]
-[ext_resource type="Script" path="res://velocity_component.gd" id="3_knswb"]
-[ext_resource type="PackedScene" uid="uid://cmplaadmyeejn" path="res://damager_component.tscn" id="4_omai7"]
+[ext_resource type="Script" path="res://components/velocity_component.gd" id="3_knswb"]
+[ext_resource type="PackedScene" path="res://components/damager_component.tscn" id="4_n8b6f"]
 [ext_resource type="Script" path="res://damage.gd" id="5_unh05"]
 
-[sub_resource type="Resource" id="Resource_l0x2n"]
+[sub_resource type="Resource" id="Resource_isdix"]
 script = ExtResource("5_unh05")
 amount = 1
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0llep"]
-radius = 0.165859
-height = 0.621559
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u6dr4"]
+radius = 0.161122
+height = 0.566122
 
 [node name="player_standard_bullet" type="Node3D"]
 script = ExtResource("1_qm4vp")
@@ -27,13 +27,14 @@ texture = ExtResource("1_wid02")
 script = ExtResource("3_knswb")
 speed = 20.0
 
-[node name="damager_component" parent="." instance=ExtResource("4_omai7")]
-damage = SubResource("Resource_l0x2n")
+[node name="damager_component" parent="." instance=ExtResource("4_n8b6f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0548609, 0)
+damage = SubResource("Resource_isdix")
 damage_target = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="damager_component"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.029928, 0)
-shape = SubResource("CapsuleShape3D_0llep")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0469581, 0)
+shape = SubResource("CapsuleShape3D_u6dr4")
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_screen_exited"]
 [connection signal="velocity_changed" from="VelocityComponent" to="." method="_on_velocity_changed"]

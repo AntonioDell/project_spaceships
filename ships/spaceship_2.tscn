@@ -1,10 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://b22yup87gus65"]
+[gd_scene load_steps=14 format=3]
 
 [ext_resource type="Script" path="res://ships/spaceship_2.gd" id="1_jqm56"]
 [ext_resource type="PackedScene" uid="uid://bpbnpe1p4jf3j" path="res://ships/gun.tscn" id="2_libnk"]
 [ext_resource type="ArrayMesh" uid="uid://cq5wqspt3i63s" path="res://ship_meshes/MicroRecon_Mesh.res" id="2_t1xew"]
-[ext_resource type="PackedScene" uid="uid://bb5cfb1ykc0wr" path="res://detect_player_component.tscn" id="4_iv4h5"]
-[ext_resource type="PackedScene" uid="uid://dvb80kv17x16k" path="res://velocity_component.tscn" id="4_jhxgk"]
+[ext_resource type="PackedScene" uid="uid://bb5cfb1ykc0wr" path="res://components/detect_player_component.tscn" id="4_iv4h5"]
+[ext_resource type="PackedScene" uid="uid://dvb80kv17x16k" path="res://components/velocity_component.tscn" id="4_jhxgk"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n6so8"]
 points = PackedVector3Array(-0.2, -0.692063, -0.322954, 0.1, 1.01028, 0.144177, 0.199856, 0.941809, 0.144, -0.399801, -0.644428, 0.444, 1.21905, 0.125053, -0.146409, -1.10473, 0.277456, -0.375048, 0.399801, -0.644428, 0.444, 1.10473, 0.277456, -0.375048, 0.228392, -1.17015, -0.0702782, -1.21905, 0.125053, -0.146409, -0.228392, -1.17015, -0.0702782, -0.1, 0.77639, 0.311089, -0.1, 0.943486, -0.156353, 0.914286, 0.125053, 0.158278, -0.914286, 0.125053, 0.158278, -0.199856, 0.941809, 0.144, 0.228392, -1.17015, 0.0820654, 1.10473, 0.125053, -0.375048, 0.1, 0.77639, 0.311089, -1.10473, 0.125053, -0.375048, 0.418839, -0.52232, 0.463048, -0.228392, -1.17015, 0.0820654, -0.418839, -0.52232, 0.463048, 0.2, -0.692063, -0.322954, 0.1, 0.843189, -0.223089, 0.1, 0.943486, -0.156353, -0.1, 1.01028, 0.0106318, -0.0998238, 0.941809, 0.244, 0.1, 1.01028, 0.0106318, 0.0998238, 0.941809, 0.244, -1.0972, 0.2489, -0.127377, 1.0972, 0.2489, -0.127377)

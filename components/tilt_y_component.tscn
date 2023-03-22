@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dc7pu5v45t7ue"]
+
+[ext_resource type="Script" path="res://components/tilt_y_component.gd" id="1_0l6vq"]
+
+[node name="tilt_y_component" type="Node"]
+script = ExtResource("1_0l6vq")

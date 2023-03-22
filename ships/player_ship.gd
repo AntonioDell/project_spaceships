@@ -45,7 +45,6 @@ func _on_barrel_roll_ended(acceleration: Vector2):
 func _on_barrel_roll_progress(new_velocity, roll_rotation): 
 	rotation = roll_rotation
 	velocity = new_velocity
-	
 
 
 func _on_player_shoots():
@@ -53,6 +52,7 @@ func _on_player_shoots():
 
 
 func _on_damage_receiver_component_damage_received(damage: Damage):
+	if _invincibility_component.is_invincible: return
 	_invincibility_component.is_invincible = true
 	_health_tracker.change_health(-damage.amount)
 	
@@ -60,3 +60,4 @@ func _on_damage_receiver_component_damage_received(damage: Damage):
 
 func _on_health_tracker_component_health_depleted():
 	get_tree().reload_current_scene()
+

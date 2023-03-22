@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://8ofi6mj0nigs"]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://ships/barrel_roll_component.gd" id="1_bhgyy"]
-[ext_resource type="Script" path="res://velocity_component.gd" id="2_vgx6x"]
+[ext_resource type="Script" path="res://components/velocity_component.gd" id="2_vgx6x"]
 
 [node name="barrel_roll_component" type="Node"]
 script = ExtResource("1_bhgyy")

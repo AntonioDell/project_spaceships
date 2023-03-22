@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cmplaadmyeejn"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://damager_component.gd" id="1_wncti"]
+[ext_resource type="Script" path="res://components/damager_component.gd" id="1_wncti"]
 
 [node name="damager_component" type="Area3D"]
 collision_layer = 2

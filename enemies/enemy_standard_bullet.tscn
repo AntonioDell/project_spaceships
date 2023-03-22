@@ -1,18 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://7h31cq5cyxdx"]
+[gd_scene load_steps=8 format=3 uid="uid://dawh8a08mqloo"]
 
 [ext_resource type="Script" path="res://enemies/enemy_standard_bullet.gd" id="1_0nnlm"]
 [ext_resource type="Texture2D" uid="uid://wr03gkixpsw8" path="res://enemies/enemy_standard_bullet.png" id="2_jpcd6"]
-[ext_resource type="Script" path="res://velocity_component.gd" id="3_rgex5"]
-[ext_resource type="PackedScene" uid="uid://cmplaadmyeejn" path="res://damager_component.tscn" id="4_1tpg2"]
+[ext_resource type="Script" path="res://components/velocity_component.gd" id="3_rgex5"]
+[ext_resource type="PackedScene" path="res://components/damager_component.tscn" id="4_8aa01"]
 [ext_resource type="Script" path="res://damage.gd" id="5_6axqj"]
 
-[sub_resource type="Resource" id="Resource_y6bln"]
+[sub_resource type="Resource" id="Resource_xrjqu"]
 script = ExtResource("5_6axqj")
 amount = 1
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_g40w3"]
-radius = 0.165859
-height = 0.621559
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_d530m"]
+radius = 0.161122
+height = 0.566122
 
 [node name="enemy_standard_bullet" type="Node3D"]
 script = ExtResource("1_0nnlm")
@@ -29,12 +29,12 @@ script = ExtResource("3_rgex5")
 direction = Vector2(0, 1)
 speed = 20.0
 
-[node name="damager_component" parent="." instance=ExtResource("4_1tpg2")]
-damage = SubResource("Resource_y6bln")
+[node name="damager_component" parent="." instance=ExtResource("4_8aa01")]
+damage = SubResource("Resource_xrjqu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="damager_component"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0610464, 0)
-shape = SubResource("CapsuleShape3D_g40w3")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0469581, 0)
+shape = SubResource("CapsuleShape3D_d530m")
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]
 [connection signal="velocity_changed" from="VelocityComponent" to="." method="_on_velocity_changed"]
