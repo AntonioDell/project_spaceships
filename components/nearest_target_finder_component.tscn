@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnouepedknxeu"]
+
+[ext_resource type="Script" path="res://components/nearest_target_finder_component.gd" id="1_ws8ve"]
+
+[node name="nearest_target_finder_component" type="Node"]
+script = ExtResource("1_ws8ve")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cbv2h2w75awyr"]
+[gd_scene load_steps=14 format=3 uid="uid://cbv2h2w75awyr"]
 
 [ext_resource type="ArrayMesh" uid="uid://cq5wqspt3i63s" path="res://ship_meshes/MicroRecon_Mesh.res" id="1_4e2e8"]
 [ext_resource type="Script" path="res://enemies/enemy_ship_1.gd" id="1_82crk"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" path="res://components/health_tracker_component.tscn" id="6_v0suc"]
 [ext_resource type="PackedScene" path="res://components/damage_receiver_component.tscn" id="6_vytmq"]
 [ext_resource type="PackedScene" path="res://components/random_delay_comopnent.tscn" id="8_yti63"]
+[ext_resource type="PackedScene" uid="uid://cvljtu6cv210g" path="res://enemies/small_health_bar.tscn" id="9_k3cfw"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dqbf2"]
 points = PackedVector3Array(0.0998415, 1.14888, 0.143961, 0.0998415, 1.14888, 0.0440388, -0.10008, 1.14888, 0.143961, 0.0998415, 1.0487, 0.24396, 0.19992, 1.0487, 0.143961, 1.2, 0.248783, -0.155961, 1.09992, 0.348744, -0.155961, 0.0998415, 1.0487, -0.155961, -0.10008, 1.14888, 0.0440388, 1.09992, 0.348744, -0.25604, -1.10016, 0.348744, -0.155961, -0.200159, 1.0487, 0.143961, -0.10008, 1.0487, 0.24396, 0.0998415, 0.848774, 0.344039, 0.899763, 0.248783, 0.143961, 1.09992, 0.248783, -0.0559613, 1.2, 0.248783, -0.25604, 1.2, 0.148823, -0.155961, 0.0998415, 0.948734, -0.25604, -0.10008, 1.0487, -0.155961, -1.10016, 0.348744, -0.25604, 1.09992, 0.248783, -0.355961, -1.2, 0.248783, -0.155961, -1.10016, 0.248783, -0.0559613, -0.900002, 0.248783, 0.143961, -0.10008, 0.848774, 0.344039, 0.399841, -0.551128, 0.444039, 0.899763, 0.148823, 0.143961, 1.09992, 0.148823, -0.0559613, 1.2, 0.148823, -0.25604, 0.399841, -0.651314, 0.444039, 0.599763, -0.551128, 0.143961, 0.19992, -1.15112, 0.0440388, 0.0998415, 0.448705, -0.355961, -0.10008, 0.948734, -0.25604, -1.10016, 0.248783, -0.355961, -1.2, 0.248783, -0.25604, 1.09992, 0.148823, -0.355961, -1.2, 0.148823, -0.155961, -1.10016, 0.148823, -0.0559613, -0.900002, 0.148823, 0.143961, -0.40008, -0.551128, 0.444039, 0.19992, -1.15112, -0.0559613, -0.40008, -0.651314, 0.444039, -0.200159, -1.15112, 0.0440388, -0.10008, 0.448705, -0.355961, -1.10016, 0.148823, -0.355961, -1.2, 0.148823, -0.25604, 0.19992, -0.751275, -0.355961, -0.600002, -0.551128, 0.143961, -0.200159, -1.15112, -0.0559613, -0.200159, -0.751275, -0.355961)
@@ -21,6 +22,9 @@ point_count = 2
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tapl2"]
 size = Vector3(1.73565, 1.81057, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_kajp8"]
+viewport_path = NodePath("SubViewport")
 
 [node name="EnemyShip1" type="CharacterBody3D"]
 collision_layer = 0
@@ -63,6 +67,11 @@ shape = SubResource("BoxShape3D_tapl2")
 [node name="random_delay_comopnent" parent="." instance=ExtResource("8_yti63")]
 min_delay = 1.0
 max_delay = 5.0
+
+[node name="small_health_bar" parent="." node_paths=PackedStringArray("health_tracker_component") instance=ExtResource("9_k3cfw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34578, 0)
+texture = SubResource("ViewportTexture_kajp8")
+health_tracker_component = NodePath("../health_tracker_component")
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_screen_exited"]
 [connection signal="timeout" from="ShootCooldown" to="." method="_on_shoot_cooldown_timeout"]

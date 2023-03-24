@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvljtu6cv210g"]
+
+[ext_resource type="Script" path="res://enemies/small_health_bar.gd" id="1_2m68u"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_o5ilo"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j632k"]
+bg_color = Color(0.639216, 0.207843, 0.0980392, 1)
+
+[node name="small_health_bar" type="Sprite3D"]
+texture = SubResource("ViewportTexture_o5ilo")
+script = ExtResource("1_2m68u")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+size = Vector2i(100, 20)
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.5
+offset_bottom = 3.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_j632k")
+max_value = 3.0
+value = 3.0
+show_percentage = false
+
+[node name="VisibilityTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true

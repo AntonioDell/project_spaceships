@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4bv8vibe17vc"]
+
+[ext_resource type="Script" path="res://components/targetable_component.gd" id="1_lr8v7"]
+
+[node name="targetable_component" type="Node3D" groups=["targets"]]
+script = ExtResource("1_lr8v7")
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

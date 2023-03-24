@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cucsfffswxicn"]
+[gd_scene load_steps=17 format=3 uid="uid://cucsfffswxicn"]
 
 [ext_resource type="Script" path="res://ships/player_ship.gd" id="1_r5s6i"]
 [ext_resource type="ArrayMesh" uid="uid://b5ukyqbhdkitg" path="res://ship_meshes/InfrareddFurtive.res" id="2_yiwjg"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" path="res://ships/barrel_roll_component.tscn" id="8_m7n1j"]
 [ext_resource type="PackedScene" path="res://components/player_control_component.tscn" id="9_rqw4b"]
 [ext_resource type="PackedScene" path="res://components/velocity_component.tscn" id="10_fdiv8"]
+[ext_resource type="PackedScene" uid="uid://b4bv8vibe17vc" path="res://components/targetable_component.tscn" id="12_eq85u"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tglfw"]
 points = PackedVector3Array(-0.688658, -1.95049, -0.155479, 0.196671, 2.08413, 0.139625, 0.294699, 1.3951, 0.23796, -3.14921, -1.26187, 0.434824, 3.14921, -1.26187, 0.434824, 0.163676, 1, -0.466575, -3.14921, -0.769475, 0.139625, 3.14921, -0.769475, 0.139625, 0.5, -1.23332, -0.39064, -0.196671, 2.08413, -0.25391, -2.55858, -0.375805, 0.434824, -0.5, -1.23332, -0.39064, 0.393343, -2.04921, 0.0411928, 2.55858, -0.375805, 0.434824, 3.14921, -1.36018, 0.139625, 0.196671, 2.08413, -0.25391, -3.14921, -1.36018, 0.139625, -0.163676, 1, -0.466575, 0.393343, -2.04921, -0.155479, -0.196671, 2.08413, 0.139625, 3.14921, -0.671159, 0.23796, -3.14921, -0.671159, 0.23796, -0.196671, 1.88709, -0.352246, -0.393343, -2.04921, 0.0411928, 0.196671, 1.88709, -0.352246, -3.14921, -1.36018, 0.336392, 3.14921, -1.36018, 0.336392, 0.688658, -1.95049, -0.155479, -0.393343, -2.04921, -0.155479, 2.9, -0.616666, 0.395893, -2.9, -0.616666, 0.395893, -0.294699, 1.3951, 0.23796)
@@ -83,6 +84,8 @@ health = 3
 speed = 15.0
 
 [node name="tilt_y_component" parent="." instance=ExtResource("6_k3wgp")]
+
+[node name="targetable_component" parent="." instance=ExtResource("12_eq85u")]
 
 [connection signal="damage_received" from="damage_receiver_component" to="." method="_on_damage_receiver_component_damage_received"]
 [connection signal="damage_received" from="damage_receiver_component2" to="." method="_on_damage_receiver_component_damage_received"]
