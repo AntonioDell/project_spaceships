@@ -1,72 +1,84 @@
-extends CharacterBody3D
+extends Node3D
 
 
-enum {MOVE, FIND_TARGET, AIM, SHOOT, EXIT_SCREEN}
+enum State { MOVE, FIND_TARGET, AIM, SHOOT, EXIT_SCREEN }
 
 
-var _state = FIND_TARGET
-
+var _state = State.MOVE:
+	set(new_value):
+		if _state != new_value:
+			print("State: %s" % State.keys()[new_value])
+		_state = new_value
 
 @onready var _follow_curve_component := $follow_curve_component as FollowCurveComponent
-@onready var _gun := $gun as Gun
+@onready var _gun := %Gun as Gun
 @onready var _target_finder := $nearest_target_finder_component as NearestTargetFinder
 @onready var _health_tracker_component := $health_tracker_component as HealthTrackerComponent
+@onready var _rotate_toward_target_component := $rotate_toward_target_component as RotateTowardTargetComponent
+@onready var _aim_timer := $AimTimer as Timer
+@onready var _gun_cooldown_timer := $GunCooldownTimer as Timer
+@onready var _visible_on_screen_notifier := $VisibleOnScreenNotifier3D as VisibleOnScreenNotifier3D
 
 
-func _process(delta):
+func _process(_delta):
 	match _state:
-		MOVE: _follow_curve_component.start_follow()
-		FIND_TARGET: 
-			_target_finder.find_nearest_target(global_position)
-			_state = AIM
-		AIM: _rotate_towards_target(delta) 
-		SHOOT: _shoot()
-		EXIT_SCREEN: 
+		State.MOVE: _move()
+		State.FIND_TARGET: _find_target()
+		State.AIM: _aim() 
+		State.SHOOT: _shoot()
+		State.EXIT_SCREEN: 
 			_follow_curve_component.stop_follow()
 			queue_free()
 
 
-func _on_target_lost():
-	_state = FIND_TARGET
+func _move():
+	_follow_curve_component.start_follow()
+	if _gun_cooldown_timer.is_stopped():
+		_gun_cooldown_timer.start()
 
-func _rotate_towards_target(delta: float):
-	if not _target_finder.target: 
-		_state = FIND_TARGET
+
+func _on_gun_cooldown_timer_timeout():
+	_state = State.FIND_TARGET
+
+
+func _find_target():
+	if not _visible_on_screen_notifier.is_on_screen():
+		_state = State.MOVE
 		return
-	var target_position := _target_finder.target.global_position
+	_target_finder.find_nearest_target(global_position)
+	_state = State.AIM
 	
-	var own_position_2d = Vector2(global_position.x, global_position.y)
-	var target_position_2d = Vector2(target_position.x, target_position.y)
-	var direction = target_position_2d - own_position_2d
 
-	var target_angle = atan2(direction.y, direction.x)
-	var current_angle = global_rotation.z
-	var necessary_rotation = wrapf(target_angle - current_angle, -PI, PI)
 
-	var angular_speed = TAU * .5
-	print("Target position %s, own position %s, necessary_rotation %s" % [target_position, global_position, rad_to_deg(necessary_rotation)])
-	global_rotation.z = lerp_angle(global_rotation.z, global_rotation.z + necessary_rotation, delta * angular_speed)
-	if necessary_rotation == global_rotation.z:
-		print("Rotate finished")
+func _aim():
+	if _aim_timer.is_stopped():
+		_aim_timer.start()
+	_rotate_toward_target_component.start_rotation(_target_finder.target.global_position)
 
+
+func _on_aim_timer_timeout():
+	_state = State.SHOOT
 
 
 func _shoot():
-	var target_direction = Vector2(\
-		_target_finder.target.global_position.x,\
-		_target_finder.target.global_position.y)
-	_gun.fire(target_direction)
-	_state = MOVE
-	
+	_gun.fire(_target_finder.target.global_position - _gun.global_position)
+	_state = State.MOVE
+
+
+func _on_target_lost():
+	_state = State.FIND_TARGET
+	if not _aim_timer.is_stopped():
+		_aim_timer.stop()
 
 
 func _on_health_depleted():
 	queue_free()
 
 
+func _on_damage_received(damage: Damage):
+	_health_tracker_component.change_health(-damage.amount)
+
+
 func _on_screen_exited():
 	queue_free()
 
-
-func _on_damage_received(damage: Damage):
-	_health_tracker_component.change_health(-damage.amount)

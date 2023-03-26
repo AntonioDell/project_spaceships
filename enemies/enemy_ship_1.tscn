@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bpbnpe1p4jf3j" path="res://ships/gun.tscn" id="4_8tlv1"]
 [ext_resource type="PackedScene" uid="uid://dawh8a08mqloo" path="res://enemies/enemy_standard_bullet.tscn" id="5_43wo0"]
 [ext_resource type="PackedScene" path="res://components/health_tracker_component.tscn" id="6_v0suc"]
-[ext_resource type="PackedScene" path="res://components/damage_receiver_component.tscn" id="6_vytmq"]
+[ext_resource type="PackedScene" uid="uid://bhdohvue6bejt" path="res://components/damage_receiver_component.tscn" id="6_vytmq"]
 [ext_resource type="PackedScene" path="res://components/random_delay_comopnent.tscn" id="8_yti63"]
 [ext_resource type="PackedScene" uid="uid://cvljtu6cv210g" path="res://enemies/small_health_bar.tscn" id="9_k3cfw"]
 
@@ -23,7 +23,7 @@ point_count = 2
 [sub_resource type="BoxShape3D" id="BoxShape3D_tapl2"]
 size = Vector3(1.73565, 1.81057, 1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_kajp8"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_pu8ev"]
 viewport_path = NodePath("SubViewport")
 
 [node name="EnemyShip1" type="CharacterBody3D"]
@@ -43,7 +43,7 @@ shape = SubResource("ConvexPolygonShape3D_dqbf2")
 
 [node name="follow_curve_component" parent="." instance=ExtResource("2_0xaou")]
 curve = SubResource("Curve3D_rk2p7")
-progress_units_per_second = 5.0
+progress_units_per_second = 3.0
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
 
@@ -70,7 +70,7 @@ max_delay = 5.0
 
 [node name="small_health_bar" parent="." node_paths=PackedStringArray("health_tracker_component") instance=ExtResource("9_k3cfw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34578, 0)
-texture = SubResource("ViewportTexture_kajp8")
+texture = SubResource("ViewportTexture_pu8ev")
 health_tracker_component = NodePath("../health_tracker_component")
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_screen_exited"]

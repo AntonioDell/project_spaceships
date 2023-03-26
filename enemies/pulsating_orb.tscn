@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Shader" path="res://enemies/pulsating_effect.gdshader" id="1_53boy"]
+[ext_resource type="Script" path="res://enemies/pulsating_orb.gd" id="2_g2lxx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sb38x"]
+render_priority = 0
+shader = ExtResource("1_53boy")
+shader_parameter/pulsating_color = Vector3(1, 0, 0)
+shader_parameter/min_frequency = 0.1
+shader_parameter/max_frequency = 2.0
+shader_parameter/pulsation_duration = 2.0
+shader_parameter/red_duration = 0.2
+shader_parameter/min_alpha = 0.4
+shader_parameter/max_alpha = 0.8
+
+[sub_resource type="SphereMesh" id="SphereMesh_jkpor"]
+
+[node name="PulsatingOrb" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.63514, -3.0158, 0)
+material_override = SubResource("ShaderMaterial_sb38x")
+mesh = SubResource("SphereMesh_jkpor")
+script = ExtResource("2_g2lxx")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnffouysuhgjm"]
+
+[ext_resource type="Script" path="res://components/rotate_toward_target_component.gd" id="1_bpsep"]
+
+[node name="rotate_toward_target_component" type="Node"]
+script = ExtResource("1_bpsep")

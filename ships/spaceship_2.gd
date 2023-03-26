@@ -28,8 +28,8 @@ func _fire_rockets():
 	if is_firing: return
 	is_firing = true
 	# TODO: Use player position for firing at
-	_gun_left.fire(Vector2(0,-1), rotation)
-	_gun_right.fire(Vector2(0,-1), rotation)
+	_gun_left.fire(Vector3.DOWN)
+	_gun_right.fire(Vector3.DOWN)
 	await get_tree().create_timer(2).timeout
 	is_firing = false
 	state = IDLE

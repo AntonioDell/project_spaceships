@@ -2,10 +2,10 @@ class_name VelocityComponent
 extends Node
 
 
-signal velocity_changed(new_velocity: Vector3, acceleration: Vector2)
+signal velocity_changed(new_velocity: Vector3, acceleration: Vector3)
 
 
-@export var direction := Vector2.ZERO:
+@export var direction := Vector3.ZERO:
 	set(new_value):
 		direction = new_value.normalized()
 @export var speed := 5.0
@@ -15,12 +15,12 @@ signal velocity_changed(new_velocity: Vector3, acceleration: Vector2)
 @export var is_disabled := false
 
 
-var _velocity := Vector2.ZERO
-var _current_acceleration := Vector2.ZERO
+var _velocity := Vector3.ZERO
+var _current_acceleration := Vector3.ZERO
 
 
-func reset_motion(velocity = Vector3.ZERO, acceleration = Vector2.ZERO):
-	_velocity = Vector2(velocity.x, velocity.y)
+func reset_motion(velocity = Vector3.ZERO, acceleration = Vector3.ZERO):
+	_velocity = velocity
 	_current_acceleration = acceleration
 
 
@@ -37,5 +37,5 @@ func _physics_process(delta):
 	else:
 		_velocity = speed * _current_acceleration
 
-	emit_signal("velocity_changed", Vector3(_velocity.x, _velocity.y, 0), _current_acceleration)
+	emit_signal("velocity_changed", _velocity, _current_acceleration)
 

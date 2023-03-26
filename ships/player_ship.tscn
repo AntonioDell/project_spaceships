@@ -4,13 +4,13 @@
 [ext_resource type="ArrayMesh" uid="uid://b5ukyqbhdkitg" path="res://ship_meshes/InfrareddFurtive.res" id="2_yiwjg"]
 [ext_resource type="PackedScene" uid="uid://bpbnpe1p4jf3j" path="res://ships/gun.tscn" id="4_0l4rk"]
 [ext_resource type="PackedScene" uid="uid://cpipm3o5v2hep" path="res://ships/player_standard_bullet.tscn" id="4_466we"]
-[ext_resource type="PackedScene" path="res://components/damage_receiver_component.tscn" id="5_p1ntq"]
+[ext_resource type="PackedScene" uid="uid://bhdohvue6bejt" path="res://components/damage_receiver_component.tscn" id="5_p1ntq"]
 [ext_resource type="PackedScene" uid="uid://dc7pu5v45t7ue" path="res://components/tilt_y_component.tscn" id="6_k3wgp"]
 [ext_resource type="PackedScene" path="res://components/invincibility_component.tscn" id="7_t356y"]
 [ext_resource type="PackedScene" path="res://components/health_tracker_component.tscn" id="8_h7mw1"]
 [ext_resource type="PackedScene" path="res://ships/barrel_roll_component.tscn" id="8_m7n1j"]
 [ext_resource type="PackedScene" path="res://components/player_control_component.tscn" id="9_rqw4b"]
-[ext_resource type="PackedScene" path="res://components/velocity_component.tscn" id="10_fdiv8"]
+[ext_resource type="PackedScene" uid="uid://cft7ni100ld2" path="res://components/velocity_component.tscn" id="10_fdiv8"]
 [ext_resource type="PackedScene" uid="uid://b4bv8vibe17vc" path="res://components/targetable_component.tscn" id="12_eq85u"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_tglfw"]
@@ -25,7 +25,7 @@ size = Vector3(0.407137, 0.103077, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_logbo"]
 size = Vector3(0.0940306, 1, 1)
 
-[node name="PlayerShip" type="CharacterBody3D"]
+[node name="PlayerShip" type="CharacterBody3D" groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_r5s6i")
 

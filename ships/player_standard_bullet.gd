@@ -1,7 +1,7 @@
 extends Node3D
 
 
-@export var direction:= Vector2.UP
+@export var direction:= Vector3.UP
 var _motion := Vector3.ZERO
 @onready var _velocity_component:= $VelocityComponent as VelocityComponent
 
@@ -19,7 +19,7 @@ func _on_screen_exited():
 
 
 func _on_velocity_changed(new_velocity, _acceleration):
-	_motion = Vector3(new_velocity.x, new_velocity.y, 0)
+	_motion = new_velocity
 
 
 func _on_damager_component_damage_dealt(_damage):

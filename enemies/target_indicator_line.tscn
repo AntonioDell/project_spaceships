@@ -3,13 +3,13 @@
 [ext_resource type="Script" path="res://enemies/target_indicator_line.gd" id="1_5imnv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2gsq8"]
+shading_mode = 0
 vertex_color_use_as_albedo = true
 albedo_color = Color(0.670588, 0, 0, 1)
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_xjcug"]
 
 [node name="target_indicator_line" type="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.48977, 0)
 material_override = SubResource("StandardMaterial3D_2gsq8")
 mesh = SubResource("ImmediateMesh_xjcug")
 script = ExtResource("1_5imnv")

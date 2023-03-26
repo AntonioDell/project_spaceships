@@ -10,6 +10,14 @@ signal damage_dealt(damage: Damage)
 	set(new_value):
 		damage_target = new_value
 		_set_physics_layers()
+@export var is_disabled := false:
+	set(new_value):
+		is_disabled = new_value
+		_enable_or_disable_area()
+
+
+func _ready():
+	_enable_or_disable_area()
 
 
 func _set_physics_layers():
@@ -18,4 +26,11 @@ func _set_physics_layers():
 
 
 func _on_area_entered(area):
+	if not area is DamageReceiverComponent:
+		return
 	emit_signal("damage_dealt", damage)
+
+
+func _enable_or_disable_area():
+	monitoring = not is_disabled
+	monitorable = not is_disabled

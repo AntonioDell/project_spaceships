@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://c74vbxx363dyn"]
+
+[ext_resource type="Script" path="res://enemies/enemy_ship_3.gd" id="1_py8vy"]
+[ext_resource type="ArrayMesh" uid="uid://db0y8c8s1d81m" path="res://ships/MicroRecon_Mesh.res" id="2_2mym3"]
+[ext_resource type="Script" path="res://components/damager_component.gd" id="2_wykwu"]
+[ext_resource type="PackedScene" path="res://enemies/pulsating_orb.tscn" id="4_401ki"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tmats"]
+radius = 3.0
+
+[node name="EnemyShip3" type="Node3D"]
+script = ExtResource("1_py8vy")
+
+[node name="MicroReconMesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_2mym3")
+
+[node name="damager_component" type="Area3D" parent="."]
+script = ExtResource("2_wykwu")
+is_disabled = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="damager_component"]
+shape = SubResource("SphereShape3D_tmats")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.446, 0, 7.05101)
+
+[node name="PulsatingOrb" parent="." instance=ExtResource("4_401ki")]
+
+[node name="PulsatingOrb2" parent="." instance=ExtResource("4_401ki")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.97064, 0, 4.47236)

@@ -24,8 +24,6 @@ environment = SubResource("Environment_w7m7k")
 [node name="3DObjects" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.861, -24.0872, 0)
 
-[node name="EnemyShip2" parent="3DObjects" instance=ExtResource("2_ato7p")]
-
 [node name="PlayerShip" parent="3DObjects" instance=ExtResource("1_oyvow")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
 
@@ -74,4 +72,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.63, 23.8795, 0)
 [node name="EnemySpawner" parent="." node_paths=PackedStringArray("top_left_corner_reference", "enemy_parent") instance=ExtResource("4_7frir")]
 top_left_corner_reference = NodePath("../3DObjects/TopLeftCorner")
 enemy_parent = NodePath("../3DObjects")
-size_1_enemies = Array[PackedScene]([ExtResource("3_v7nxx")])
+size_1_enemies = Array[PackedScene]([ExtResource("3_v7nxx"), ExtResource("2_ato7p")])

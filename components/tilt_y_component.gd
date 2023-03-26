@@ -10,7 +10,7 @@ signal tilt_changed(tilt_rotation: Vector3)
 @export var is_disabled := false
 
 
-var movement_direction := Vector2.ZERO:
+var movement_direction := Vector3.ZERO:
 	set(new_value):
 		movement_direction = new_value.normalized()
 

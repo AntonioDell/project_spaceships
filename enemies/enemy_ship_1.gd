@@ -10,7 +10,6 @@ enum { MOVE, SHOOT, EXIT_SCREEN }
 
 var _state = MOVE
 @onready var _follow_curve_component := $follow_curve_component as FollowCurveComponent
-@onready var _visible_on_screen_notifier := $VisibleOnScreenNotifier3D
 @onready var _gun := $Gun as Gun
 @onready var _health_tracker_component := $health_tracker_component as HealthTrackerComponent
 
@@ -22,11 +21,11 @@ func _ready():
 	_follow_curve_component.curve = move_curve
 
 
-func _process(delta):
+func _process(_delta):
 	match _state:
 		MOVE: _follow_curve_component.start_follow()
 		SHOOT: 
-			_gun.fire(Vector2.UP)
+			_gun.fire(Vector3.DOWN)
 			_state = MOVE
 		EXIT_SCREEN: 
 			_follow_curve_component.stop_follow()

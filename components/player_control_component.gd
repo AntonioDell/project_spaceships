@@ -7,7 +7,7 @@ signal player_rolls()
 
 @export var is_disabled := false
 
-func _process(delta):
+func _process(_delta):
 	if is_disabled: return
 	
 	var direction = Input.get_vector("move_left", "move_right", "move_down", "move_up")

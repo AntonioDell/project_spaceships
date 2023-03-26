@@ -14,3 +14,7 @@ func draw_line(target: Vector3):
 	_immediate_mesh.surface_add_vertex(global_position)
 	_immediate_mesh.surface_add_vertex(target)
 	_immediate_mesh.surface_end()
+
+
+func clear():
+	_immediate_mesh.clear_surfaces()

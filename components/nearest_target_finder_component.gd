@@ -17,11 +17,11 @@ func find_nearest_target(from: Vector3):
 	var matching_targets = all_targets.filter(func (t: TargetableComponent): return t.target_type == target_type and t.is_enabled)
 	var nearest_target: TargetableComponent
 	var smallest_distance := INF
-	for target in matching_targets:
-		var distance = (target as Node3D).global_position.distance_squared_to(from) 
+	for matching_target in matching_targets:
+		var distance = (matching_target as Node3D).global_position.distance_squared_to(from) 
 		if distance < smallest_distance:
 			smallest_distance = distance
-			nearest_target = target
+			nearest_target = matching_target
 	target = nearest_target
 	if target:
 		target.targetable_disabled.connect(_on_targetable_disabled)

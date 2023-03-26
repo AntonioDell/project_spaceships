@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://vys7eiiulbe7"]
+[gd_scene load_steps=14 format=3 uid="uid://vys7eiiulbe7"]
 
 [ext_resource type="Script" path="res://enemies/enemy_ship_2.gd" id="1_p361h"]
 [ext_resource type="ArrayMesh" uid="uid://cg5ib8hsw4n7a" path="res://ship_meshes/MeteorSniper_Mesh.res" id="2_sej52"]
@@ -6,20 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://bpbnpe1p4jf3j" path="res://ships/gun.tscn" id="4_7j7p1"]
 [ext_resource type="PackedScene" uid="uid://dawh8a08mqloo" path="res://enemies/enemy_standard_bullet.tscn" id="5_q6qcd"]
 [ext_resource type="PackedScene" path="res://components/health_tracker_component.tscn" id="6_bh4xw"]
-[ext_resource type="PackedScene" path="res://components/damage_receiver_component.tscn" id="7_346lj"]
+[ext_resource type="PackedScene" uid="uid://bhdohvue6bejt" path="res://components/damage_receiver_component.tscn" id="7_346lj"]
 [ext_resource type="PackedScene" uid="uid://cvljtu6cv210g" path="res://enemies/small_health_bar.tscn" id="9_7sb1i"]
-[ext_resource type="PackedScene" uid="uid://67m6mkpknoyn" path="res://enemies/target_indicator_line.tscn" id="10_hy51y"]
+[ext_resource type="PackedScene" uid="uid://cnffouysuhgjm" path="res://components/rotate_toward_target_component.tscn" id="11_6lg6x"]
 [ext_resource type="PackedScene" uid="uid://bnouepedknxeu" path="res://components/nearest_target_finder_component.tscn" id="11_tqxdk"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_85cne"]
-height = 2.98784
-radius = 0.755464
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_umxyi"]
-height = 2.98784
-radius = 0.755464
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_gk8i8"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_m0yi6"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="Curve3D" id="Curve3D_rk2p7"]
@@ -29,48 +21,22 @@ _data = {
 }
 point_count = 2
 
-[node name="EnemyShip2" type="CharacterBody3D"]
-collision_layer = 0
-collision_mask = 0
-axis_lock_linear_z = true
-axis_lock_angular_x = true
-axis_lock_angular_y = true
-motion_mode = 1
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_umxyi"]
+height = 2.98784
+radius = 0.755464
+
+[node name="EnemyShip2" type="Node3D"]
 script = ExtResource("1_p361h")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(-1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("CylinderShape3D_85cne")
-
-[node name="MeteorSniperMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.3, 0, 0, 0, -0.3, 2.62268e-08, 0, -2.62268e-08, -0.3, 0, 0, 0)
-mesh = ExtResource("2_sej52")
-
-[node name="Gun" parent="." instance=ExtResource("4_7j7p1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.49548, 0)
-bullet_scene = ExtResource("5_q6qcd")
-
-[node name="ShootCooldown" type="Timer" parent="."]
-wait_time = 5.0
-
-[node name="damage_receiver_component" parent="." instance=ExtResource("7_346lj")]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="damage_receiver_component"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00946626, 0)
-shape = SubResource("CylinderShape3D_umxyi")
 
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
 
 [node name="small_health_bar" parent="." node_paths=PackedStringArray("health_tracker_component") instance=ExtResource("9_7sb1i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34578, 0)
-texture = SubResource("ViewportTexture_gk8i8")
+texture = SubResource("ViewportTexture_m0yi6")
 health_tracker_component = NodePath("../health_tracker_component")
-
-[node name="target_indicator_line" parent="." instance=ExtResource("10_hy51y")]
 
 [node name="follow_curve_component" parent="." instance=ExtResource("3_0o5rg")]
 curve = SubResource("Curve3D_rk2p7")
-progress_units_per_second = 2.0
 
 [node name="nearest_target_finder_component" parent="." instance=ExtResource("11_tqxdk")]
 
@@ -78,8 +44,38 @@ progress_units_per_second = 2.0
 max_health = 3
 health = 3
 
-[connection signal="timeout" from="ShootCooldown" to="." method="_on_shoot_cooldown_timeout"]
-[connection signal="damage_received" from="damage_receiver_component" to="." method="_on_damage_received"]
+[node name="rotate_toward_target_component" parent="." instance=ExtResource("11_6lg6x")]
+nodes_to_rotate = Array[NodePath]([NodePath("../Rotating")])
+
+[node name="Rotating" type="Node3D" parent="."]
+
+[node name="MeteorSniperMesh" type="MeshInstance3D" parent="Rotating"]
+transform = Transform3D(0.3, 0, 0, 0, -0.3, -2.62268e-08, 0, 2.62268e-08, -0.3, 0, 0, 0)
+mesh = ExtResource("2_sej52")
+skeleton = NodePath("../..")
+
+[node name="Gun" parent="Rotating" instance=ExtResource("4_7j7p1")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.49548, 0)
+bullet_scene = ExtResource("5_q6qcd")
+
+[node name="damage_receiver_component" parent="Rotating" instance=ExtResource("7_346lj")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rotating/damage_receiver_component"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00946626, 0)
+shape = SubResource("CylinderShape3D_umxyi")
+
+[node name="AimTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="GunCooldownTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_screen_exited"]
 [connection signal="target_lost" from="nearest_target_finder_component" to="." method="_on_target_lost"]
 [connection signal="health_depleted" from="health_tracker_component" to="." method="_on_health_depleted"]
+[connection signal="damage_received" from="Rotating/damage_receiver_component" to="." method="_on_damage_received"]
+[connection signal="timeout" from="AimTimer" to="." method="_on_aim_timer_timeout"]
+[connection signal="timeout" from="GunCooldownTimer" to="." method="_on_gun_cooldown_timer_timeout"]
