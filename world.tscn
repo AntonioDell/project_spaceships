@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://drfjqgic0ja43"]
+[gd_scene load_steps=7 format=3 uid="uid://drfjqgic0ja43"]
 
 [ext_resource type="PackedScene" uid="uid://cucsfffswxicn" path="res://ships/player_ship.tscn" id="1_oyvow"]
 [ext_resource type="PackedScene" uid="uid://p8h4dx0c4p7" path="res://scrolling_background.tscn" id="2_5idxo"]
-[ext_resource type="PackedScene" uid="uid://vys7eiiulbe7" path="res://enemies/enemy_ship_2.tscn" id="2_ato7p"]
-[ext_resource type="PackedScene" uid="uid://cbv2h2w75awyr" path="res://enemies/enemy_ship_1.tscn" id="3_v7nxx"]
 [ext_resource type="PackedScene" uid="uid://cul8hacm5cor" path="res://enemies/enemy_spawner.tscn" id="4_7frir"]
+[ext_resource type="PackedScene" uid="uid://c74vbxx363dyn" path="res://enemies/enemy_ship_3.tscn" id="4_qov4y"]
 
 [sub_resource type="Environment" id="Environment_w7m7k"]
 background_mode = 3
@@ -72,4 +71,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.63, 23.8795, 0)
 [node name="EnemySpawner" parent="." node_paths=PackedStringArray("top_left_corner_reference", "enemy_parent") instance=ExtResource("4_7frir")]
 top_left_corner_reference = NodePath("../3DObjects/TopLeftCorner")
 enemy_parent = NodePath("../3DObjects")
-size_1_enemies = Array[PackedScene]([ExtResource("3_v7nxx"), ExtResource("2_ato7p")])
+size_1_enemies = Array[PackedScene]([ExtResource("4_qov4y")])
