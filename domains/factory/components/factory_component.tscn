@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bitksedykedm5"]
+
+[ext_resource type="Script" path="res://domains/factory/components/factory_component.gd" id="1_dcw2i"]
+
+[node name="factory_component" type="Node"]
+script = ExtResource("1_dcw2i")
+
+[node name="ProductionTimer" type="Timer" parent="."]
+one_shot = true

@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bhdohvue6bejt" path="res://components/damage_receiver_component.tscn" id="5_p1ntq"]
 [ext_resource type="PackedScene" uid="uid://dc7pu5v45t7ue" path="res://components/tilt_y_component.tscn" id="6_k3wgp"]
 [ext_resource type="PackedScene" path="res://components/invincibility_component.tscn" id="7_t356y"]
-[ext_resource type="PackedScene" path="res://components/health_tracker_component.tscn" id="8_h7mw1"]
+[ext_resource type="PackedScene" uid="uid://b2dfru238pwqr" path="res://components/health_tracker_component.tscn" id="8_h7mw1"]
 [ext_resource type="PackedScene" path="res://ships/barrel_roll_component.tscn" id="8_m7n1j"]
 [ext_resource type="PackedScene" path="res://components/player_control_component.tscn" id="9_rqw4b"]
 [ext_resource type="PackedScene" uid="uid://cft7ni100ld2" path="res://components/velocity_component.tscn" id="10_fdiv8"]

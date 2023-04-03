@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ProductBlueprint" load_steps=2 format=3 uid="uid://b3wkbucyaq3pt"]
+
+[ext_resource type="Script" path="res://domains/factory/resources/product_blueprint.gd" id="1_cdl7i"]
+
+[resource]
+script = ExtResource("1_cdl7i")
+id = ""
+production_time = 0.0
+required_resources = {}

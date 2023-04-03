@@ -21,8 +21,8 @@ func stop_follow():
 	if not is_progressing: return
 	is_progressing = false
 	var original_parent = $PathFollow3D.get_child(0)
-	original_parent.reparent(get_parent_node_3d())
-	reparent(original_parent)
+	original_parent.call_deferred("reparent", get_parent_node_3d())
+	call_deferred("reparent", original_parent)
 
 
 func _physics_process(delta):

@@ -1,14 +1,38 @@
-[gd_scene load_steps=12 format=3 uid="uid://c74vbxx363dyn"]
+[gd_scene load_steps=16 format=3 uid="uid://c74vbxx363dyn"]
 
 [ext_resource type="Script" path="res://enemies/enemy_ship_3.gd" id="1_py8vy"]
 [ext_resource type="ArrayMesh" uid="uid://db0y8c8s1d81m" path="res://ships/MicroRecon_Mesh.res" id="2_2mym3"]
 [ext_resource type="Script" path="res://components/damager_component.gd" id="2_wykwu"]
-[ext_resource type="PackedScene" path="res://enemies/pulsating_orb.tscn" id="4_401ki"]
+[ext_resource type="Script" path="res://damage.gd" id="5_52mv6"]
 [ext_resource type="PackedScene" uid="uid://cvl5vhof5g8cm" path="res://enemies/follow_curve_component.tscn" id="5_q7jqs"]
 [ext_resource type="PackedScene" uid="uid://bnouepedknxeu" path="res://components/nearest_target_finder_component.tscn" id="6_r23uc"]
+[ext_resource type="Shader" path="res://enemies/pulsating_effect.gdshader" id="7_5238f"]
 [ext_resource type="PackedScene" uid="uid://cft7ni100ld2" path="res://components/velocity_component.tscn" id="7_ndkj3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_13pu3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u7rdd"]
+render_priority = 0
+shader = ExtResource("7_5238f")
+shader_parameter/pulsating_color = Vector3(1, 0, 0)
+shader_parameter/min_frequency = 0.3
+shader_parameter/max_frequency = 3.0
+shader_parameter/pulsation_duration = 1.0
+shader_parameter/red_duration = 0.5
+shader_parameter/min_alpha = 0.4
+shader_parameter/max_alpha = 0.8
+shader_parameter/glow_intensity = 5.0
+shader_parameter/glow_threshold = 0.8
+shader_parameter/is_visible = false
+
+[sub_resource type="SphereMesh" id="SphereMesh_b4bk7"]
+material = SubResource("ShaderMaterial_u7rdd")
+radius = 3.0
+height = 6.0
+
+[sub_resource type="Resource" id="Resource_jwpyl"]
+script = ExtResource("5_52mv6")
+amount = 2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tmats"]
 radius = 3.0
@@ -35,8 +59,13 @@ shape = SubResource("BoxShape3D_13pu3")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 mesh = ExtResource("2_2mym3")
 
+[node name="PulsatingOrb" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("SphereMesh_b4bk7")
+
 [node name="damager_component" type="Area3D" parent="."]
 script = ExtResource("2_wykwu")
+damage = SubResource("Resource_jwpyl")
 is_disabled = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="damager_component"]
@@ -44,13 +73,6 @@ shape = SubResource("SphereShape3D_tmats")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.446, 0, 7.05101)
-
-[node name="PulsatingOrb" parent="." instance=ExtResource("4_401ki")]
-visible = false
-
-[node name="PulsatingOrb2" parent="." instance=ExtResource("4_401ki")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.97064, 0, 4.47236)
-visible = false
 
 [node name="follow_curve_component" parent="." instance=ExtResource("5_q7jqs")]
 curve = SubResource("Curve3D_jaxdx")
@@ -65,13 +87,13 @@ aabb = AABB(-1, -0.474772, -1, 2, 0.949544, 2)
 [node name="velocity_component" parent="." instance=ExtResource("7_ndkj3")]
 
 [node name="PlayerDetectArea" type="Area3D" parent="."]
-collision_layer = 2
-collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetectArea"]
 shape = SubResource("SphereShape3D_ticsf")
 
+[connection signal="damage_dealt" from="damager_component" to="." method="_on_damager_component_damage_dealt"]
 [connection signal="target_lost" from="nearest_target_finder_component" to="." method="_on_target_lost"]
 [connection signal="velocity_changed" from="velocity_component" to="." method="_on_velocity_changed"]
 [connection signal="area_entered" from="PlayerDetectArea" to="." method="_on_player_detect_area_entered"]
+[connection signal="body_entered" from="PlayerDetectArea" to="." method="_on_player_detect_area_body_entered"]

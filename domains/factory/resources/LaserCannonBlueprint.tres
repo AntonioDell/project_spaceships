@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ProductBlueprint" load_steps=2 format=3 uid="uid://bf4j8lpc2osxe"]
+
+[ext_resource type="Script" path="res://domains/factory/resources/product_blueprint.gd" id="1_cq2pi"]
+
+[resource]
+script = ExtResource("1_cq2pi")
+id = "laser_cannon"
+production_time = 0.0
+required_resources = {}
